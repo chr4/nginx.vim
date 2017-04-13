@@ -12,9 +12,26 @@ setlocal iskeyword+=:
 syn match ngxVariable '\$\(\w\+\|{\w\+}\)'
 syn match ngxVariableBlock '\$\(\w\+\|{\w\+}\)' contained
 syn match ngxVariableString '\$\(\w\+\|{\w\+}\)' contained
-syn region ngxBlock start=+^+ end=+{+ skip=+\${+ contains=ngxComment,ngxDirectiveBlock,ngxVariableBlock,ngxString oneline
+syn region ngxBlock start=+^+ end=+{+ skip=+\${+ contains=ngxComment,ngxInteger,ngxIPaddr,ngxDirectiveBlock,ngxVariableBlock,ngxString oneline
 syn region ngxString start=+[^:a-zA-Z>!\\@]\z(["']\)+lc=1 end=+\z1+ skip=+\\\\\|\\\z1+ contains=ngxVariableString
 syn match ngxComment ' *#.*$'
+
+" These regular expressions where taken (and adapted) from
+" http://vim.1045645.n5.nabble.com/IPv6-support-for-quot-dns-quot-zonefile-syntax-highlighting-td1197292.html
+syn match ngxInteger '\K*\<\(\d[0-9.]*\|[0-9.]*\d\)'
+syn match ngxIPaddr '\s\zs\([0-2]\?\d\{1,2}\.\)\{3}[0-2]\?\d\{1,2}'
+syn match ngxIPaddr '\s\zs\[\(\x\{1,4}:\)\{6}\(\x\{1,4}:\x\{1,4}\|\([0-2]\?\d\{1,2}\.\)\{3}[0-2]\?\d\{1,2}\)\]'
+syn match ngxIPaddr '\s\zs\[::\(\(\x\{1,4}:\)\{,6}\x\{1,4}\|\(\x\{1,4}:\)\{,5}\([0-2]\?\d\{1,2}\.\)\{3}[0-2]\?\d\{1,2}\)\]'
+syn match ngxIPaddr '\s\zs\[\(\x\{1,4}:\)\{1}:\(\(\x\{1,4}:\)\{,5}\x\{1,4}\|\(\x\{1,4}:\)\{,4}\([0-2]\?\d\{1,2}\.\)\{3}[0-2]\?\d\{1,2}\)\]'
+syn match ngxIPaddr '\s\zs\[\(\x\{1,4}:\)\{2}:\(\(\x\{1,4}:\)\{,4}\x\{1,4}\|\(\x\{1,4}:\)\{,3}\([0-2]\?\d\{1,2}\.\)\{3}[0-2]\?\d\{1,2}\)\]'
+syn match ngxIPaddr '\s\zs\[\(\x\{1,4}:\)\{3}:\(\(\x\{1,4}:\)\{,3}\x\{1,4}\|\(\x\{1,4}:\)\{,2}\([0-2]\?\d\{1,2}\.\)\{3}[0-2]\?\d\{1,2}\)\]'
+syn match ngxIPaddr '\s\zs\[\(\x\{1,4}:\)\{4}:\(\(\x\{1,4}:\)\{,2}\x\{1,4}\|\(\x\{1,4}:\)\{,1}\([0-2]\?\d\{1,2}\.\)\{3}[0-2]\?\d\{1,2}\)\]'
+syn match ngxIPaddr '\s\zs\[\(\x\{1,4}:\)\{5}:\(\(\x\{1,4}:\)\{,1}\x\{1,4}\|\([0-2]\?\d\{1,2}\.\)\{3}[0-2]\?\d\{1,2}\)\]'
+syn match ngxIPaddr '\s\zs\[\(\x\{1,4}:\)\{6}:\x\{1,4}\]'
+
+" Highlight wildcard listening signs also as IPaddr
+syn match ngxIPaddr '\s\zs\[::]'
+syn match ngxIPaddr '\s\zs\*'
 
 syn keyword ngxBoolean on
 syn keyword ngxBoolean off
@@ -38,7 +55,7 @@ syn keyword ngxDirectiveImportant root
 syn keyword ngxDirectiveImportant server
 syn keyword ngxDirectiveImportant server_name
 syn keyword ngxDirectiveImportant listen contained
-syn region  ngxDirectiveImportantListen matchgroup=ngxDirectiveImportant start=+listen+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxListenOptions,ngxString
+syn region  ngxDirectiveImportantListen matchgroup=ngxDirectiveImportant start=+listen+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxListenOptions,ngxString,ngxIPaddr
 syn keyword ngxDirectiveImportant internal
 syn keyword ngxDirectiveImportant proxy_pass
 syn keyword ngxDirectiveImportant memcached_pass
@@ -2127,7 +2144,9 @@ hi link ngxVariableString PreProc
 hi link ngxBlock Normal
 hi link ngxString String
 
+hi link ngxIPaddr PreProc
 hi link ngxBoolean Boolean
+hi link ngxInteger Constant
 hi link ngxDirectiveBlock Statement
 hi link ngxDirectiveImportant Type
 hi link ngxDirectiveControl Keyword

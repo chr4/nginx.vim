@@ -2147,7 +2147,7 @@ hi link ngxDirectiveControl Keyword
 hi link ngxDirectiveDeprecated Error
 hi link ngxDirective Identifier
 hi link ngxDirectiveThirdParty Special
-hi link ngxListenOptions Keyword
+hi link ngxListenOptions PreProc
 hi link ngxMailProtocol Keyword
 hi link ngxSSLProtocol Keyword
 

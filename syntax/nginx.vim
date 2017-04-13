@@ -5,10 +5,6 @@ if exists("b:current_syntax")
   finish
 end
 
-setlocal iskeyword+=.
-setlocal iskeyword+=/
-setlocal iskeyword+=:
-
 syn match ngxVariable '\$\(\w\+\|{\w\+}\)'
 syn match ngxVariableBlock '\$\(\w\+\|{\w\+}\)' contained
 syn match ngxVariableString '\$\(\w\+\|{\w\+}\)' contained

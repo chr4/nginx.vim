@@ -2131,15 +2131,13 @@ syn keyword ngxDirectiveThirdParty xss_input_types
 " ZIP archiver for nginx
 
 
-" highlight
-
+" Highlight
 hi link ngxComment Comment
 hi link ngxVariable Identifier
 hi link ngxVariableBlock Identifier
 hi link ngxVariableString PreProc
 hi link ngxBlock Normal
 hi link ngxString String
-
 hi link ngxIPaddr PreProc
 hi link ngxBoolean Boolean
 hi link ngxInteger Constant
@@ -2149,7 +2147,6 @@ hi link ngxDirectiveControl Keyword
 hi link ngxDirectiveDeprecated Error
 hi link ngxDirective Identifier
 hi link ngxDirectiveThirdParty Special
-
 hi link ngxListenOptions Keyword
 hi link ngxMailProtocol Keyword
 hi link ngxSSLProtocol Keyword

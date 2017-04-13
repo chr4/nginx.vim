@@ -32,18 +32,18 @@ syn match ngxIPaddr '\s\zs\*'
 syn keyword ngxBoolean on
 syn keyword ngxBoolean off
 
-syn keyword ngxDirectiveBlock http         contained
-syn keyword ngxDirectiveBlock mail         contained
-syn keyword ngxDirectiveBlock events       contained
-syn keyword ngxDirectiveBlock server       contained
-syn keyword ngxDirectiveBlock types        contained
-syn keyword ngxDirectiveBlock location     contained
-syn keyword ngxDirectiveBlock upstream     contained
-syn keyword ngxDirectiveBlock charset_map  contained
-syn keyword ngxDirectiveBlock limit_except contained
-syn keyword ngxDirectiveBlock if           contained
-syn keyword ngxDirectiveBlock geo          contained
-syn keyword ngxDirectiveBlock map          contained
+syn keyword ngxDirectiveBlock http          contained
+syn keyword ngxDirectiveBlock mail          contained
+syn keyword ngxDirectiveBlock events        contained
+syn keyword ngxDirectiveBlock server        contained
+syn keyword ngxDirectiveBlock types         contained
+syn keyword ngxDirectiveBlock location      contained
+syn keyword ngxDirectiveBlock upstream      contained
+syn keyword ngxDirectiveBlock charset_map   contained
+syn keyword ngxDirectiveBlock limit_except  contained
+syn keyword ngxDirectiveBlock if            contained
+syn keyword ngxDirectiveBlock geo           contained
+syn keyword ngxDirectiveBlock map           contained
 syn keyword ngxDirectiveBlock split_clients contained
 
 syn keyword ngxDirectiveImportant include

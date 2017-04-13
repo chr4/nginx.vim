@@ -1,0 +1,158 @@
+# vim: ft=nginx
+snippet l80
+	listen [::]:80 ipv6only=off;
+	$0
+
+# Listen statements when using multiple http server blocks
+snippet l80-multi
+	listen [::]:80 default_server;
+	listen 80 default_server;
+	$0
+
+snippet l443
+	listen [::]:443 ipv6only=off ssl http2 default_server;
+	$0
+
+# Listen statements when using multiple ssl server blocks
+snippet l443-multi
+	listen [::]:443 ssl http2 default_server;
+	listen 443 ssl http2 default_server;
+	$0
+
+# Better ciphers, less compatibility
+snippet cipher-a
+	ssl_protocols TLSv1.1 TLSv1.2;
+	ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
+	$0
+
+# Good ciphers with good compatibliity
+snippet cipher-b
+	ssl_protocols TLSv1.1 TLSv1.2;
+	ssl_ciphers 'EDH+CAMELLIA:EDH+aRSA:EECDH+aRSA+AESGCM:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH:+CAMELLIA256:+AES256:+CAMELLIA128:+AES128:+SSLv3:!aNULL:!eNULL:!LOW:!3DES:!MD5:!EXP:!PSK:!DSS:!RC4:!SEED:!ECDSA:CAMELLIA256-SHA:AES256-SHA:CAMELLIA128-SHA:AES128-SHA';
+	$0
+
+# Ciphers compatible with XP/IE8
+snippets cipher-c
+	ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+	ssl_ciphers 'ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS';
+	$0
+
+snippet ssl-options
+	# SSL certificate
+	ssl_dhparam /etc/nginx/certs/dhparam.pem;
+	ssl_certificate /etc/nginx/certs/${4:www.example.com}.crt;
+	ssl_certificate_key /etc/nginx/certs/${5:www.example.com}.key;
+
+	ssl_prefer_server_ciphers on;
+	ssl_stapling off;
+	ssl_stapling_verify off;
+
+	# Like other webservers, nginx doesn't provide an option to automatically rotate keys.
+	# This is dangerous. While session tickets improve performance, it should be disabled until a
+	# good solution is available. See
+	# - https://blog.cloudflare.com/tls-session-resumption-full-speed-and-secure/
+	# - https://timtaubert.de/blog/2014/11/the-sad-state-of-server-side-tls-session-resumption-implementations/
+	ssl_session_cache 'shared:SSL:10m';
+	ssl_session_tickets off;
+
+	# This setting only makes sense with RSA 4096 keys
+	# ssl_ecdh_curve secp384r1;
+
+	# Enable HSTS (1 year) and some security options
+	add_header Strict-Transport-Security 'max-age=31536000 includeSubDomains; preload;';
+	$0
+
+snippet security-headers
+	add_header X-Frame-Options 'DENY';
+	add_header X-Content-Type-Options 'nosniff';
+	add_header X-Frame-Options 'SAMEORIGIN';
+	add_header X-XSS-Protection '1; mode=block';
+	add_header X-Robots-Tag 'none';
+	add_header X-Download-Options 'noopen';
+	add_header X-Permitted-Cross-Domain-Policies 'none';
+	$0
+
+snippet robots.txt
+	# Tell bots to not index this site
+	location /robots.txt {
+	    default_type text/plain;
+	    return 200 'User-agent: *\nDisallow: /\n';
+	}
+	$0
+
+snippet basic-auth
+	auth_basic 'Restricted';
+	auth_basic_user_file ${1:/etc/nginx/htpasswd};
+	$0
+
+snippet proxy_pass
+	proxy_pass_header Date;
+	proxy_set_header X-Forwarded-Proto $scheme;
+	proxy_set_header Host $host;
+	proxy_set_header X-Real-IP $remote_addr;
+	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	proxy_pass http://${1:backend};
+	$0
+
+snippet php-fpm
+	location ~ \.php$ {
+	    include fastcgi_params;
+	    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+	    fastcgi_index index.php;
+	    fastcgi_intercept_errors on;
+	    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	    fastcgi_pass ${1:127.0.0.1:9000};
+	}
+	$0
+
+snippet php-uwsgi
+	location ~ \.php$ {
+	    include uwsgi_params;
+	    uwsgi_max_temp_file_size 4096m;
+	    uwsgi_modifier1 14;
+	    uwsgi_read_timeout 900;
+	    uwsgi_send_timeout 900;
+	    uwsgi_pass ${1:unix:///run/uwsgi/php.sock};
+	}
+	$0
+
+snippet redirect-ssl
+	location / {
+	    return 301 https://$http_host$request_uri;
+	}
+	$0
+
+snippet redirect-other
+	# Redirect other requested hosts
+	if ($host != '${1:DOMAIN}') {
+	    return 301 https://${2:DOMAIN}$request_uri;
+	}
+	$0
+
+snippet letsencrypt
+	listen [::]:80 ipv6only=off;
+
+	# Serve well-known path for letsencrypt
+	location /.well-known/acme-challenge {
+	    root /etc/nginx/certs/acme;
+	    default_type text/plain;
+	}
+
+	location / {
+	    return 301 https://$http_host$request_uri;
+	}
+	$0
+
+snippet cut-trailing-slash
+	rewrite ^/(.*)/$ $scheme://$http_host:$server_port/$1 permanent;
+	$0
+
+snippet location
+	location ${1:/} {
+	    ${0:${VISUAL}}
+	}
+
+snippet server
+	server {
+	    ${0:${VISUAL}}
+	}

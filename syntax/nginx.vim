@@ -46,6 +46,8 @@ syn keyword ngxDirectiveImportant fastcgi_pass
 syn keyword ngxDirectiveImportant scgi_pass
 syn keyword ngxDirectiveImportant uwsgi_pass
 syn keyword ngxDirectiveImportant try_files
+syn keyword ngxDirectiveImportant error_page
+syn keyword ngxDirectiveImportant post_action
 
 syn keyword ngxListenOptions default_server contained
 syn keyword ngxListenOptions ssl            contained
@@ -69,9 +71,6 @@ syn keyword ngxDirectiveControl break
 syn keyword ngxDirectiveControl return
 syn keyword ngxDirectiveControl rewrite
 syn keyword ngxDirectiveControl set
-
-syn keyword ngxDirectiveError error_page
-syn keyword ngxDirectiveError post_action
 
 syn keyword ngxDirectiveDeprecated connections
 syn keyword ngxDirectiveDeprecated imap
@@ -2132,7 +2131,6 @@ hi link ngxBoolean Boolean
 hi link ngxDirectiveBlock Statement
 hi link ngxDirectiveImportant Type
 hi link ngxDirectiveControl Keyword
-hi link ngxDirectiveError Constant
 hi link ngxDirectiveDeprecated Error
 hi link ngxDirective Identifier
 hi link ngxDirectiveThirdParty Special

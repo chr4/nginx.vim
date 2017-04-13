@@ -397,7 +397,8 @@ syn keyword ngxDirective proxy_intercept_errors
 syn keyword ngxDirective proxy_limit_rate
 syn keyword ngxDirective proxy_max_temp_file_size
 syn keyword ngxDirective proxy_method
-syn keyword ngxDirective proxy_next_upstream
+syn keyword ngxDirective proxy_next_upstream contained
+syn region  ngxDirectiveProxyNextUpstream matchgroup=ngxDirective start=+^\s*\zsproxy_next_upstream\ze\s.*;+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxProxyNextUpstreamOptions,ngxString
 syn keyword ngxDirective proxy_next_upstream_timeout
 syn keyword ngxDirective proxy_next_upstream_tries
 syn keyword ngxDirective proxy_no_cache
@@ -667,6 +668,19 @@ syn keyword ngxDirective xslt_string_param
 syn keyword ngxDirective xslt_stylesheet
 syn keyword ngxDirective xslt_types
 syn keyword ngxDirective zone
+
+syn keyword ngxProxyNextUpstreamOptions error          contained
+syn keyword ngxProxyNextUpstreamOptions timeout        contained
+syn keyword ngxProxyNextUpstreamOptions invalid_header contained
+syn keyword ngxProxyNextUpstreamOptions http_500       contained
+syn keyword ngxProxyNextUpstreamOptions http_502       contained
+syn keyword ngxProxyNextUpstreamOptions http_503       contained
+syn keyword ngxProxyNextUpstreamOptions http_504       contained
+syn keyword ngxProxyNextUpstreamOptions http_403       contained
+syn keyword ngxProxyNextUpstreamOptions http_404       contained
+syn keyword ngxProxyNextUpstreamOptions http_429       contained
+syn keyword ngxProxyNextUpstreamOptions non_idempotent contained
+syn keyword ngxProxyNextUpstreamOptions off            contained
 
 " 3rd party module list:
 " https://www.nginx.com/resources/wiki/modules/
@@ -2162,6 +2176,7 @@ hi link ngxDirective Identifier
 hi link ngxDirectiveThirdParty Special
 hi link ngxListenOptions PreProc
 hi link ngxUpstreamServerOptions PreProc
+hi link ngxProxyNextUpstreamOptions PreProc
 hi link ngxMailProtocol Keyword
 hi link ngxSSLProtocol Keyword
 

@@ -48,7 +48,8 @@ syn keyword ngxDirectiveBlock split_clients contained
 
 syn keyword ngxDirectiveImportant include
 syn keyword ngxDirectiveImportant root
-syn keyword ngxDirectiveImportant server
+syn keyword ngxDirectiveImportant server contained
+syn region  ngxDirectiveImportantServer matchgroup=ngxDirectiveImportant start=+^\s*\zsserver\ze\s.*;+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxUpstreamServerOptions,ngxString,ngxIPaddr,ngxBoolean,ngxInteger
 syn keyword ngxDirectiveImportant server_name
 syn keyword ngxDirectiveImportant listen contained
 syn region  ngxDirectiveImportantListen matchgroup=ngxDirectiveImportant start=+listen+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxListenOptions,ngxString,ngxIPaddr,ngxBoolean,ngxInteger
@@ -61,6 +62,18 @@ syn keyword ngxDirectiveImportant uwsgi_pass
 syn keyword ngxDirectiveImportant try_files
 syn keyword ngxDirectiveImportant error_page
 syn keyword ngxDirectiveImportant post_action
+
+syn keyword ngxUpstreamServerOptions weight         contained
+syn keyword ngxUpstreamServerOptions max_conns      contained
+syn keyword ngxUpstreamServerOptions max_fails      contained
+syn keyword ngxUpstreamServerOptions fail_timeout   contained
+syn keyword ngxUpstreamServerOptions backup         contained
+syn keyword ngxUpstreamServerOptions down           contained
+syn keyword ngxUpstreamServerOptions resolve        contained
+syn keyword ngxUpstreamServerOptions route          contained
+syn keyword ngxUpstreamServerOptions service        contained
+syn keyword ngxUpstreamServerOptions default_server contained
+syn keyword ngxUpstreamServerOptions slow_start     contained
 
 syn keyword ngxListenOptions default_server contained
 syn keyword ngxListenOptions ssl            contained
@@ -2148,6 +2161,7 @@ hi link ngxDirectiveDeprecated Error
 hi link ngxDirective Identifier
 hi link ngxDirectiveThirdParty Special
 hi link ngxListenOptions PreProc
+hi link ngxUpstreamServerOptions PreProc
 hi link ngxMailProtocol Keyword
 hi link ngxSSLProtocol Keyword
 

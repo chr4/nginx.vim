@@ -14,7 +14,7 @@ syn match ngxComment ' *#.*$'
 
 " These regular expressions where taken (and adapted) from
 " http://vim.1045645.n5.nabble.com/IPv6-support-for-quot-dns-quot-zonefile-syntax-highlighting-td1197292.html
-syn match ngxInteger '\K*\<\(\d[0-9.]*\|[0-9.]*\d\)'
+syn match ngxInteger '\W\zs\(\d[0-9.]*\|[0-9.]*\d\)\ze\W'
 syn match ngxIPaddr '\s\zs\([0-2]\?\d\{1,2}\.\)\{3}[0-2]\?\d\{1,2}'
 syn match ngxIPaddr '\s\zs\[\(\x\{1,4}:\)\{6}\(\x\{1,4}:\x\{1,4}\|\([0-2]\?\d\{1,2}\.\)\{3}[0-2]\?\d\{1,2}\)\]'
 syn match ngxIPaddr '\s\zs\[::\(\(\x\{1,4}:\)\{,6}\x\{1,4}\|\(\x\{1,4}:\)\{,5}\([0-2]\?\d\{1,2}\.\)\{3}[0-2]\?\d\{1,2}\)\]'

@@ -2180,7 +2180,7 @@ hi link ngxVariableBlock Identifier
 hi link ngxVariableString PreProc
 hi link ngxBlock Normal
 hi link ngxString String
-hi link ngxIPaddr PreProc
+hi link ngxIPaddr Keyword
 hi link ngxBoolean Boolean
 hi link ngxInteger Constant
 hi link ngxDirectiveBlock Statement

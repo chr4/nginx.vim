@@ -544,8 +544,11 @@ syn keyword ngxDirective ssl_handshake_timeout
 syn keyword ngxDirective ssl_password_file
 syn keyword ngxDirective ssl_prefer_server_ciphers
 syn keyword ngxDirective ssl_preread
-syn keyword ngxDirective ssl_protocols nextgroup=ngxSSLProtocol skipwhite
-syn keyword ngxSSLProtocol SSLv2 SSLv3 TLSv1 TLSv1.1 TLSv1.2 contained nextgroup=ngxSSLProtocol skipwhite
+syn keyword ngxDirective ssl_protocols nextgroup=ngxSSLProtocol,ngxSSLProtocolDeprecated skipwhite
+syn match ngxSSLProtocol 'TLSv1' contained nextgroup=ngxSSLProtocol,ngxSSLProtocolDeprecated skipwhite
+syn match ngxSSLProtocol 'TLSv1\.1' contained nextgroup=ngxSSLProtocol,ngxSSLProtocolDeprecated skipwhite
+syn match ngxSSLProtocol 'TLSv1\.2' contained nextgroup=ngxSSLProtocol,ngxSSLProtocolDeprecated skipwhite
+syn keyword ngxSSLProtocolDeprecated SSLv2 SSLv3 contained nextgroup=ngxSSLProtocol,ngxSSLProtocolDeprecated skipwhite
 syn keyword ngxDirective ssl_session_cache
 syn keyword ngxDirective ssl_session_ticket_key
 syn keyword ngxDirective ssl_session_tickets
@@ -2178,6 +2181,7 @@ hi link ngxListenOptions PreProc
 hi link ngxUpstreamServerOptions PreProc
 hi link ngxProxyNextUpstreamOptions PreProc
 hi link ngxMailProtocol Keyword
-hi link ngxSSLProtocol Keyword
+hi link ngxSSLProtocol PreProc
+hi link ngxSSLProtocolDeprecated Error
 
 let b:current_syntax = "nginx"

@@ -565,8 +565,9 @@ syn keyword ngxDirective state
 syn keyword ngxDirective status
 syn keyword ngxDirective status_format
 syn keyword ngxDirective status_zone
-syn keyword ngxDirective sticky
-syn keyword ngxDirective sticky_cookie_insert
+syn keyword ngxDirective sticky contained
+syn keyword ngxDirective sticky_cookie_insert contained
+syn region  ngxDirectiveSticky matchgroup=ngxDirective start=+^\s*\zssticky\ze\s.*;+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxCookieOptions,ngxString
 syn keyword ngxDirective stub_status
 syn keyword ngxDirective sub_filter
 syn keyword ngxDirective sub_filter_last_modified
@@ -684,6 +685,17 @@ syn keyword ngxProxyNextUpstreamOptions http_404       contained
 syn keyword ngxProxyNextUpstreamOptions http_429       contained
 syn keyword ngxProxyNextUpstreamOptions non_idempotent contained
 syn keyword ngxProxyNextUpstreamOptions off            contained
+
+syn keyword ngxStickyOptions cookie contained
+syn region  ngxStickyOptionsCookie matchgroup=ngxStickyOptions start=+^\s*\zssticky\s\s*cookie\ze\s.*;+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxCookieOptions,ngxString
+syn keyword ngxStickyOptions route  contained
+syn keyword ngxStickyOptions learn  contained
+
+syn keyword ngxCookieOptions expires  contained
+syn keyword ngxCookieOptions domain   contained
+syn keyword ngxCookieOptions httponly contained
+syn keyword ngxCookieOptions secure   contained
+syn keyword ngxCookieOptions path     contained
 
 " 3rd party module list:
 " https://www.nginx.com/resources/wiki/modules/
@@ -2183,5 +2195,7 @@ hi link ngxProxyNextUpstreamOptions PreProc
 hi link ngxMailProtocol Keyword
 hi link ngxSSLProtocol PreProc
 hi link ngxSSLProtocolDeprecated Error
+hi link ngxStickyOptions Identifier
+hi link ngxCookieOptions PreProc
 
 let b:current_syntax = "nginx"

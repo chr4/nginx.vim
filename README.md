@@ -38,16 +38,17 @@ Embedded LUA syntax highlighting:
 ## Snippets
 The plugin comes with useful snippets which can be accessed using e.g. [vim-snipmate](https://github.com/garbas/vim-snipmate).
 
-Select decent cipher suites using `ciphers-a<tab>`, `ciphers-b<tab>` or `ciphers-c<tab>`:
+Select a decent cipher for your requirements (all of them can provide [SSLLabs A+ ratings](https://www.ssllabs.com/ssltest/analyze.html))
+
+- `ciphers-high<tab>`: High-security ciphers (elliptic curves), not compatible with IE < 11, OpenSSL-0.9.8, Safari < 7, Android < 4.4
+- `ciphers-medium<tab>`: Medium-security ciphers with good compatibility (No IE6, IE8) but TLSv1 and SHA required
+- `ciphers-low<tab>`: Low-security ciphers (using weak 3DES cipher and TLSv1), but compatible with everything but IE6 and Java6
+- `ssl-options<tab>`: Bootstrap secure SSL options
+
+Example:
 ```nginx
 ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 ssl_ciphers 'ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS';
-
-ssl_prefer_server_ciphers on;
-ssl_stapling off;
-ssl_stapling_verify off;
-ssl_session_tickets on;
-ssl_session_cache 'shared:SSL:10m';
 ```
 
 Or add a robots.txt file with `robots.txt<tab>`:

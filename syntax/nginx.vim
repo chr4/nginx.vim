@@ -546,7 +546,9 @@ syn keyword ngxDirective ssl_ecdh_curve
 syn keyword ngxDirective ssl_engine
 syn keyword ngxDirective ssl_handshake_timeout
 syn keyword ngxDirective ssl_password_file
-syn keyword ngxDirective ssl_prefer_server_ciphers
+syn keyword ngxDirective ssl_prefer_server_ciphers nextgroup=ngxSSLPreferServerCiphersInsecure,ngxSSLPreferServerCiphersTrue skipwhite
+syn keyword ngxSSLPreferServerCiphersTrue on contained
+syn keyword ngxSSLPreferServerCiphersInsecure off contained
 syn keyword ngxDirective ssl_preread
 syn keyword ngxDirective ssl_protocols nextgroup=ngxSSLProtocol,ngxSSLProtocolDeprecated skipwhite
 syn match ngxSSLProtocol 'TLSv1' contained nextgroup=ngxSSLProtocol,ngxSSLProtocolDeprecated skipwhite
@@ -555,7 +557,9 @@ syn match ngxSSLProtocol 'TLSv1\.2' contained nextgroup=ngxSSLProtocol,ngxSSLPro
 syn keyword ngxSSLProtocolDeprecated SSLv2 SSLv3 contained nextgroup=ngxSSLProtocol,ngxSSLProtocolDeprecated skipwhite
 syn keyword ngxDirective ssl_session_cache
 syn keyword ngxDirective ssl_session_ticket_key
-syn keyword ngxDirective ssl_session_tickets
+syn keyword ngxDirective ssl_session_tickets nextgroup=ngxSSLSessionTicketsInsecure,ngxSSLSessionTicketsOff skipwhite
+syn keyword ngxSSLSessionTicketsInsecure on contained
+syn keyword ngxSSLSessionTicketsOff off contained
 syn keyword ngxDirective ssl_session_timeout
 syn keyword ngxDirective ssl_stapling
 syn keyword ngxDirective ssl_stapling_file
@@ -2229,5 +2233,10 @@ hi link ngxSSLProtocolDeprecated Error
 hi link ngxStickyOptions Type
 hi link ngxCookieOptions PreProc
 hi link ngxTemplateVar Identifier
+
+hi link ngxSSLSessionTicketsOff ngxBoolean
+hi link ngxSSLSessionTicketsInsecure Error
+hi link ngxSSLPreferServerCiphersTrue ngxBoolean
+hi link ngxSSLPreferServerCiphersInsecure Error
 
 hi link ngxThirdPartyLuaBlock Function

@@ -38,7 +38,7 @@ Embedded LUA syntax highlighting
 ## Snippets
 I've added useful snippets which can be accessed using e.g. [vim-snipmate](https://github.com/garbas/vim-snipmate).
 
-Like selecting decent cipher suites using `cipher-a<tab>`, `cipher-b<tab>` or `cipher-c<tab>`:
+Like selecting decent cipher suites using `ciphers-a<tab>`, `ciphers-b<tab>` or `ciphers-c<tab>`:
 ```nginx
 ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 ssl_ciphers 'ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS';

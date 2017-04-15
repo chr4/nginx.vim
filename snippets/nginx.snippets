@@ -20,19 +20,19 @@ snippet l443-multi
 	$0
 
 # Better ciphers, less compatibility
-snippet cipher-a
+snippet ciphers-a
 	ssl_protocols TLSv1.1 TLSv1.2;
-	ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
+	ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
 	$0
 
 # Good ciphers with good compatibliity
-snippet cipher-b
+snippet ciphers-b
 	ssl_protocols TLSv1.1 TLSv1.2;
 	ssl_ciphers 'EDH+CAMELLIA:EDH+aRSA:EECDH+aRSA+AESGCM:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH:+CAMELLIA256:+AES256:+CAMELLIA128:+AES128:+SSLv3:!aNULL:!eNULL:!LOW:!3DES:!MD5:!EXP:!PSK:!DSS:!RC4:!SEED:!ECDSA:CAMELLIA256-SHA:AES256-SHA:CAMELLIA128-SHA:AES128-SHA';
 	$0
 
 # Ciphers compatible with XP/IE8
-snippets cipher-c
+snippets ciphers-c
 	ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 	ssl_ciphers 'ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS';
 	$0

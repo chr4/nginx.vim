@@ -8,6 +8,7 @@ The plugin is based on the recent vim-plugin distributed with `nginx-1.12.0` and
 
 - Highlight IPv4 and IPv6 addresses
 - Mark insecure `ssl_protocols` as errors
+- Inline template syntax highlight for **ERB** and **Jinja**
 - Improve integer matching
 - Syntax highlighting for `proxy_next_upstream` options
 - Syntax highlighting for `sticky` options
@@ -70,18 +71,27 @@ Auto-completion for location and server blocks using `location<tab>` resp. `serv
 
 ```vim
 NeoBundle 'chr4/nginx.vim'
+
+" Optionally, if you like Jinja template syntax highlighting
+NeoBundle 'lepture/vim-jinja'
 ```
 
 ### Vundle:
 
 ```vim
 Plugin 'chr4/nginx.vim'
+
+" Optionally, if you like Jinja template syntax highlighting
+Plugin 'lepture/vim-jinja'
 ```
 
 ### Pathogen:
 
 ```shell
 git clone https://github.com/chr4/nginx.vim.git bundle/nginx.vim
+
+# Optionally, if you like Jinja template syntax highlighting
+git clone https://github.com/lepture/vim-jinja.git bundle/vim-jinja
 ```
 
 ## License

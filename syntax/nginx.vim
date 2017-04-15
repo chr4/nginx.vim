@@ -5,10 +5,12 @@ if exists("b:current_syntax")
   finish
 end
 
+let b:current_syntax = "nginx"
+
 syn match ngxVariable '\$\(\w\+\|{\w\+}\)'
 syn match ngxVariableBlock '\$\(\w\+\|{\w\+}\)' contained
 syn match ngxVariableString '\$\(\w\+\|{\w\+}\)' contained
-syn region ngxBlock start=+^+ end=+{+ skip=+\${+ contains=ngxComment,ngxInteger,ngxIPaddr,ngxDirectiveBlock,ngxVariableBlock,ngxString oneline
+syn region ngxBlock start=+^+ end=+{+ skip=+\${\|{{\|{%+ contains=ngxComment,ngxInteger,ngxIPaddr,ngxDirectiveBlock,ngxVariableBlock,ngxString oneline
 syn region ngxString start=+[^:a-zA-Z>!\\@]\z(["']\)+lc=1 end=+\z1+ skip=+\\\\\|\\\z1+ contains=ngxVariableString
 syn match ngxComment ' *#.*$'
 
@@ -50,10 +52,10 @@ syn keyword ngxDirectiveBlock split_clients contained
 syn keyword ngxDirectiveImportant include
 syn keyword ngxDirectiveImportant root
 syn keyword ngxDirectiveImportant server contained
-syn region  ngxDirectiveImportantServer matchgroup=ngxDirectiveImportant start=+^\s*\zsserver\ze\s.*;+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxUpstreamServerOptions,ngxString,ngxIPaddr,ngxBoolean,ngxInteger
+syn region  ngxDirectiveImportantServer matchgroup=ngxDirectiveImportant start=+^\s*\zsserver\ze\s.*;+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxUpstreamServerOptions,ngxString,ngxIPaddr,ngxBoolean,ngxInteger,ngxTemplateVar
 syn keyword ngxDirectiveImportant server_name
 syn keyword ngxDirectiveImportant listen contained
-syn region  ngxDirectiveImportantListen matchgroup=ngxDirectiveImportant start=+listen+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxListenOptions,ngxString,ngxIPaddr,ngxBoolean,ngxInteger
+syn region  ngxDirectiveImportantListen matchgroup=ngxDirectiveImportant start=+listen+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxListenOptions,ngxString,ngxIPaddr,ngxBoolean,ngxInteger,ngxTemplateVar
 syn keyword ngxDirectiveImportant internal
 syn keyword ngxDirectiveImportant proxy_pass
 syn keyword ngxDirectiveImportant memcached_pass
@@ -398,7 +400,7 @@ syn keyword ngxDirective proxy_limit_rate
 syn keyword ngxDirective proxy_max_temp_file_size
 syn keyword ngxDirective proxy_method
 syn keyword ngxDirective proxy_next_upstream contained
-syn region  ngxDirectiveProxyNextUpstream matchgroup=ngxDirective start=+^\s*\zsproxy_next_upstream\ze\s.*;+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxProxyNextUpstreamOptions,ngxString
+syn region  ngxDirectiveProxyNextUpstream matchgroup=ngxDirective start=+^\s*\zsproxy_next_upstream\ze\s.*;+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxProxyNextUpstreamOptions,ngxString,ngxTemplateVar
 syn keyword ngxDirective proxy_next_upstream_timeout
 syn keyword ngxDirective proxy_next_upstream_tries
 syn keyword ngxDirective proxy_no_cache
@@ -567,7 +569,7 @@ syn keyword ngxDirective status_format
 syn keyword ngxDirective status_zone
 syn keyword ngxDirective sticky contained
 syn keyword ngxDirective sticky_cookie_insert contained
-syn region  ngxDirectiveSticky matchgroup=ngxDirective start=+^\s*\zssticky\ze\s.*;+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxCookieOptions,ngxString,ngxBoolean,ngxInteger
+syn region  ngxDirectiveSticky matchgroup=ngxDirective start=+^\s*\zssticky\ze\s.*;+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxCookieOptions,ngxString,ngxBoolean,ngxInteger,ngxTemplateVar
 syn keyword ngxDirective stub_status
 syn keyword ngxDirective sub_filter
 syn keyword ngxDirective sub_filter_last_modified
@@ -687,7 +689,7 @@ syn keyword ngxProxyNextUpstreamOptions non_idempotent contained
 syn keyword ngxProxyNextUpstreamOptions off            contained
 
 syn keyword ngxStickyOptions cookie contained
-syn region  ngxStickyOptionsCookie matchgroup=ngxStickyOptions start=+^\s*\zssticky\s\s*cookie\ze\s.*;+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxCookieOptions,ngxString,ngxBoolean,ngxInteger
+syn region  ngxStickyOptionsCookie matchgroup=ngxStickyOptions start=+^\s*\zssticky\s\s*cookie\ze\s.*;+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxCookieOptions,ngxString,ngxBoolean,ngxInteger,ngxTemplateVar
 syn keyword ngxStickyOptions route  contained
 syn keyword ngxStickyOptions learn  contained
 
@@ -2173,6 +2175,26 @@ syn keyword ngxDirectiveThirdParty xss_input_types
 " ZIP archiver for nginx
 
 
+" Nested syntax in Jinja templating statements
+" This dependend on https://github.com/lepture/vim-jinja
+unlet b:current_syntax
+try
+  syn include @JINJA syntax/jinja.vim
+  syn region ngxTemplate start=+{%+ end=+%}+ oneline contains=@JINJA
+  syn region ngxTemplateVar start=+{{+ end=+}}+ oneline
+catch
+endtry
+let b:current_syntax = "nginx"
+
+" Nested syntax in ERB templating statements
+" Note: This somehow needs to be loaded after Jinja support
+unlet b:current_syntax
+syn include @ERB syntax/eruby.vim
+syn region ngxTemplate start=+<%[^\=]+ end=+%>+ oneline contains=@ERB
+syn region ngxTemplateVar start=+<%=+ end=+%>+ oneline
+let b:current_syntax = "nginx"
+
+
 " Highlight
 hi link ngxComment Comment
 hi link ngxVariable Identifier
@@ -2197,5 +2219,4 @@ hi link ngxSSLProtocol PreProc
 hi link ngxSSLProtocolDeprecated Error
 hi link ngxStickyOptions Type
 hi link ngxCookieOptions PreProc
-
-let b:current_syntax = "nginx"
+hi link ngxTemplateVar Identifier

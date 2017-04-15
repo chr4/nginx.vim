@@ -22,15 +22,17 @@ Furthermore:
 
 ## Screenshots
 
-An `upstream` block with highlighted options
-<div style="width:665px">
-  <img src="https://chr4.org/images/nginx_upstream.png" alt="nginx upstream configuration">
-</div>
-
 A `server` block with highlighting of insecure `ssl_protocol` options
-<div style="width:460px">
-  <img src="https://chr4.org/images/nginx_server.png" alt="nginx server block with ssl configuration">
-</div>
+![nginx server block with ssl configuration](https://chr4.org/images/nginx_ssl.png)
+
+An `upstream` block with highlighted options
+![nginx upstream configuration](https://chr4.org/images/nginx_upstream.png)
+
+Embedded highlighting for ERB and Jinja templates
+![Embedded highlighting for ERB and Jinja templates](https://chr4.org/images/nginx_templating.png)
+
+Embedded LUA syntax highlighting
+![Embedded LUA syntax highlighting](https://chr4.org/images/nginx_lua.png)
 
 
 ## Snippets

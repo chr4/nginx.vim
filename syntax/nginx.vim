@@ -36,6 +36,7 @@ syn keyword ngxDirectiveBlock http          contained
 syn keyword ngxDirectiveBlock mail          contained
 syn keyword ngxDirectiveBlock events        contained
 syn keyword ngxDirectiveBlock server        contained
+syn keyword ngxDirectiveBlock match         contained
 syn keyword ngxDirectiveBlock types         contained
 syn keyword ngxDirectiveBlock location      contained
 syn keyword ngxDirectiveBlock upstream      contained
@@ -310,7 +311,6 @@ syn keyword ngxDirective log_not_found
 syn keyword ngxDirective log_subrequest
 syn keyword ngxDirective map_hash_bucket_size
 syn keyword ngxDirective map_hash_max_size
-syn keyword ngxDirective match
 syn keyword ngxDirective master_process
 syn keyword ngxDirective max_ranges
 syn keyword ngxDirective memcached_bind

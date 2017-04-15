@@ -34,7 +34,7 @@ A `server` block with highlighting of insecure `ssl_protocol` options
 ## Snippets
 I've added useful snippets which can be accessed using e.g. [vim-snipmate](https://github.com/garbas/vim-snipmate).
 
-Like selecting decent cipher suites using
+Like selecting decent cipher suites using `cipher-a<tab>`, `cipher-b<tab>` or `cipher-c<tab>`:
 ```nginx
 ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 ssl_ciphers 'ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS';
@@ -46,7 +46,7 @@ ssl_session_tickets on;
 ssl_session_cache 'shared:SSL:10m';
 ```
 
-Or adding a `robots.txt` file:
+Or adding a robots.txt file with `robots.txt<tab>`
 ```nginx
 # Tell bots to not index this site
 location /robots.txt {

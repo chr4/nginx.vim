@@ -9,6 +9,7 @@ The plugin is based on the recent vim-plugin distributed with `nginx-1.12.0` and
 - Highlight IPv4 and IPv6 addresses
 - Mark insecure `ssl_protocols` as errors
 - Inline template syntax highlight for **ERB** and **Jinja**
+- Inline syntax highlight for **LUA**
 - Improve integer matching
 - Syntax highlighting for `proxy_next_upstream` options
 - Syntax highlighting for `sticky` options

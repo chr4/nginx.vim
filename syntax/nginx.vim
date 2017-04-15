@@ -10,7 +10,7 @@ let b:current_syntax = "nginx"
 syn match ngxVariable '\$\(\w\+\|{\w\+}\)'
 syn match ngxVariableBlock '\$\(\w\+\|{\w\+}\)' contained
 syn match ngxVariableString '\$\(\w\+\|{\w\+}\)' contained
-syn region ngxBlock start=+^+ end=+{+ skip=+\${\|{{\|{%+ contains=ngxComment,ngxInteger,ngxIPaddr,ngxDirectiveBlock,ngxVariableBlock,ngxString oneline
+syn region ngxBlock start=+^+ end=+{+ skip=+\${\|{{\|{%+ contains=ngxComment,ngxInteger,ngxIPaddr,ngxDirectiveBlock,ngxVariableBlock,ngxString,ngxThirdPartyLuaBlock oneline
 syn region ngxString start=+[^:a-zA-Z>!\\@]\z(["']\)+lc=1 end=+\z1+ skip=+\\\\\|\\\z1+ contains=ngxVariableString
 syn match ngxComment ' *#.*$'
 
@@ -1155,40 +1155,27 @@ syn keyword ngxDirectiveThirdParty lua_regex_match_limit
 syn keyword ngxDirectiveThirdParty lua_package_path
 syn keyword ngxDirectiveThirdParty lua_package_cpath
 syn keyword ngxDirectiveThirdParty init_by_lua
-syn keyword ngxDirectiveThirdParty init_by_lua_block
 syn keyword ngxDirectiveThirdParty init_by_lua_file
 syn keyword ngxDirectiveThirdParty init_worker_by_lua
-syn keyword ngxDirectiveThirdParty init_worker_by_lua_block
 syn keyword ngxDirectiveThirdParty init_worker_by_lua_file
 syn keyword ngxDirectiveThirdParty set_by_lua
-syn keyword ngxDirectiveThirdParty set_by_lua_block
 syn keyword ngxDirectiveThirdParty set_by_lua_file
 syn keyword ngxDirectiveThirdParty content_by_lua
-syn keyword ngxDirectiveThirdParty content_by_lua_block
 syn keyword ngxDirectiveThirdParty content_by_lua_file
 syn keyword ngxDirectiveThirdParty rewrite_by_lua
-syn keyword ngxDirectiveThirdParty rewrite_by_lua_block
 syn keyword ngxDirectiveThirdParty rewrite_by_lua_file
 syn keyword ngxDirectiveThirdParty access_by_lua
-syn keyword ngxDirectiveThirdParty access_by_lua_block
 syn keyword ngxDirectiveThirdParty access_by_lua_file
 syn keyword ngxDirectiveThirdParty header_filter_by_lua
-syn keyword ngxDirectiveThirdParty header_filter_by_lua_block
 syn keyword ngxDirectiveThirdParty header_filter_by_lua_file
 syn keyword ngxDirectiveThirdParty body_filter_by_lua
-syn keyword ngxDirectiveThirdParty body_filter_by_lua_block
 syn keyword ngxDirectiveThirdParty body_filter_by_lua_file
 syn keyword ngxDirectiveThirdParty log_by_lua
-syn keyword ngxDirectiveThirdParty log_by_lua_block
 syn keyword ngxDirectiveThirdParty log_by_lua_file
-syn keyword ngxDirectiveThirdParty balancer_by_lua_block
 syn keyword ngxDirectiveThirdParty balancer_by_lua_file
 syn keyword ngxDirectiveThirdParty lua_need_request_body
-syn keyword ngxDirectiveThirdParty ssl_certificate_by_lua_block
 syn keyword ngxDirectiveThirdParty ssl_certificate_by_lua_file
-syn keyword ngxDirectiveThirdParty ssl_session_fetch_by_lua_block
 syn keyword ngxDirectiveThirdParty ssl_session_fetch_by_lua_file
-syn keyword ngxDirectiveThirdParty ssl_session_store_by_lua_block
 syn keyword ngxDirectiveThirdParty ssl_session_store_by_lua_file
 syn keyword ngxDirectiveThirdParty lua_shared_dict
 syn keyword ngxDirectiveThirdParty lua_socket_connect_timeout
@@ -2174,6 +2161,20 @@ syn keyword ngxDirectiveThirdParty xss_input_types
 " ZIP Module <https://www.nginx.com/resources/wiki/modules/zip/>
 " ZIP archiver for nginx
 
+" Contained LUA blocks for embedded syntax highlighting
+syn keyword ngxThirdPartyLuaBlock balancer_by_lua_block contained
+syn keyword ngxThirdPartyLuaBlock init_by_lua_block contained
+syn keyword ngxThirdPartyLuaBlock init_worker_by_lua_block contained
+syn keyword ngxThirdPartyLuaBlock set_by_lua_block contained
+syn keyword ngxThirdPartyLuaBlock content_by_lua_block contained
+syn keyword ngxThirdPartyLuaBlock rewrite_by_lua_block contained
+syn keyword ngxThirdPartyLuaBlock access_by_lua_block contained
+syn keyword ngxThirdPartyLuaBlock header_filter_by_lua_block contained
+syn keyword ngxThirdPartyLuaBlock body_filter_by_lua_block contained
+syn keyword ngxThirdPartyLuaBlock log_by_lua_block contained
+syn keyword ngxThirdPartyLuaBlock ssl_certificate_by_lua_block contained
+syn keyword ngxThirdPartyLuaBlock ssl_session_fetch_by_lua_block contained
+syn keyword ngxThirdPartyLuaBlock ssl_session_store_by_lua_block contained
 
 " Nested syntax in Jinja templating statements
 " This dependend on https://github.com/lepture/vim-jinja
@@ -2192,6 +2193,12 @@ unlet b:current_syntax
 syn include @ERB syntax/eruby.vim
 syn region ngxTemplate start=+<%[^\=]+ end=+%>+ oneline contains=@ERB
 syn region ngxTemplateVar start=+<%=+ end=+%>+ oneline
+let b:current_syntax = "nginx"
+
+" Enable nested LUA syntax highlighting
+unlet b:current_syntax
+syn include @LUA syntax/lua.vim
+syn region ngxLua start=+^\s*\w\+_by_lua_block\s*{+ end=+}+me=s-1 contains=ngxBlock,@LUA
 let b:current_syntax = "nginx"
 
 
@@ -2220,3 +2227,5 @@ hi link ngxSSLProtocolDeprecated Error
 hi link ngxStickyOptions Type
 hi link ngxCookieOptions PreProc
 hi link ngxTemplateVar Identifier
+
+hi link ngxThirdPartyLuaBlock Function

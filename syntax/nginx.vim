@@ -13,7 +13,7 @@ syn match ngxVariable '\$\(\w\+\|{\w\+}\)'
 syn match ngxVariableBlock '\$\(\w\+\|{\w\+}\)' contained
 syn match ngxVariableString '\$\(\w\+\|{\w\+}\)' contained
 syn region ngxBlock start=+^+ end=+{+ skip=+\${\|{{\|{%+ contains=ngxComment,ngxInteger,ngxIPaddr,ngxDirectiveBlock,ngxVariableBlock,ngxString,ngxThirdPartyLuaBlock oneline
-syn region ngxString start=+[^:a-zA-Z>!\\@]\z(["']\)+lc=1 end=+\z1+ skip=+\\\\\|\\\z1+ contains=ngxVariableString
+syn region ngxString start=+[^:a-zA-Z>!\\@]\z(["']\)+lc=1 end=+\z1+ skip=+\\\\\|\\\z1+ contains=ngxVariableString,ngxSSLCipherInsecure
 syn match ngxComment ' *#.*$'
 
 " These regular expressions where taken (and adapted) from
@@ -680,6 +680,25 @@ syn keyword ngxDirective xslt_string_param
 syn keyword ngxDirective xslt_stylesheet
 syn keyword ngxDirective xslt_types
 syn keyword ngxDirective zone
+
+" Mark insecure SSL Ciphers (Note: List might not not complete)
+syn match ngxSSLCipherInsecure '[^!]\zs3DES'
+syn match ngxSSLCipherInsecure '[^!3]\zsDES'
+syn match ngxSSLCipherInsecure '[^!]\zsRC2'
+syn match ngxSSLCipherInsecure '[^!]\zsRC4'
+syn match ngxSSLCipherInsecure '[^!]\zsMD5'
+syn match ngxSSLCipherInsecure '[^!]\zsSHA\ze\W'
+syn match ngxSSLCipherInsecure '[^!]\zsSHA1\ze\W'
+syn match ngxSSLCipherInsecure '[^!]\zsaDSS'
+syn match ngxSSLCipherInsecure '[^!a]\zsDSS'
+syn match ngxSSLCipherInsecure '[^!]\zsIDEA'
+syn match ngxSSLCipherInsecure '[^!]\zsSEED'
+syn match ngxSSLCipherInsecure '[^!]\zsECB'
+syn match ngxSSLCipherInsecure '[^!]\zsMEDIUM'
+syn match ngxSSLCipherInsecure '[^!]\zsLOW'
+syn match ngxSSLCipherInsecure '[^!]\zsaNULL'
+syn match ngxSSLCipherInsecure '[^!]\zseNULL'
+syn match ngxSSLCipherInsecure '[^!ae]\zsNULL'
 
 syn keyword ngxProxyNextUpstreamOptions error          contained
 syn keyword ngxProxyNextUpstreamOptions timeout        contained
@@ -2238,5 +2257,6 @@ hi link ngxSSLSessionTicketsOff ngxBoolean
 hi link ngxSSLSessionTicketsInsecure Error
 hi link ngxSSLPreferServerCiphersTrue ngxBoolean
 hi link ngxSSLPreferServerCiphersInsecure Error
+hi link ngxSSLCipherInsecure Error
 
 hi link ngxThirdPartyLuaBlock Function

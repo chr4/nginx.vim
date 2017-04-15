@@ -567,7 +567,7 @@ syn keyword ngxDirective status_format
 syn keyword ngxDirective status_zone
 syn keyword ngxDirective sticky contained
 syn keyword ngxDirective sticky_cookie_insert contained
-syn region  ngxDirectiveSticky matchgroup=ngxDirective start=+^\s*\zssticky\ze\s.*;+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxCookieOptions,ngxString
+syn region  ngxDirectiveSticky matchgroup=ngxDirective start=+^\s*\zssticky\ze\s.*;+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxCookieOptions,ngxString,ngxBoolean,ngxInteger
 syn keyword ngxDirective stub_status
 syn keyword ngxDirective sub_filter
 syn keyword ngxDirective sub_filter_last_modified
@@ -687,7 +687,7 @@ syn keyword ngxProxyNextUpstreamOptions non_idempotent contained
 syn keyword ngxProxyNextUpstreamOptions off            contained
 
 syn keyword ngxStickyOptions cookie contained
-syn region  ngxStickyOptionsCookie matchgroup=ngxStickyOptions start=+^\s*\zssticky\s\s*cookie\ze\s.*;+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxCookieOptions,ngxString
+syn region  ngxStickyOptionsCookie matchgroup=ngxStickyOptions start=+^\s*\zssticky\s\s*cookie\ze\s.*;+ skip=+\\\\\|\\\;+ end=+;+he=e-1 contains=ngxCookieOptions,ngxString,ngxBoolean,ngxInteger
 syn keyword ngxStickyOptions route  contained
 syn keyword ngxStickyOptions learn  contained
 

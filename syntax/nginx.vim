@@ -2240,10 +2240,10 @@ hi link ngxIPaddr Delimiter
 hi link ngxBoolean Boolean
 hi link ngxInteger Number
 hi link ngxDirectiveBlock Statement
-hi link ngxDirectiveImportant Function
+hi link ngxDirectiveImportant Type
 hi link ngxDirectiveControl Keyword
 hi link ngxDirectiveDeprecated Error
-hi link ngxDirective Type
+hi link ngxDirective Function
 hi link ngxDirectiveThirdParty Function
 hi link ngxListenOptions PreProc
 hi link ngxUpstreamServerOptions PreProc
@@ -2251,7 +2251,7 @@ hi link ngxProxyNextUpstreamOptions PreProc
 hi link ngxMailProtocol Keyword
 hi link ngxSSLProtocol PreProc
 hi link ngxSSLProtocolDeprecated Error
-hi link ngxStickyOptions Type
+hi link ngxStickyOptions ngxDirective
 hi link ngxCookieOptions PreProc
 hi link ngxTemplateVar Identifier
 

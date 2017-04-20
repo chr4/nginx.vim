@@ -40,15 +40,18 @@ The plugin comes with useful snippets which can be accessed using e.g. [vim-snip
 
 Select a decent cipher for your requirements (all of them can provide [SSLLabs A+ ratings](https://www.ssllabs.com/ssltest/analyze.html))
 
-- `ciphers-high<tab>`: High-security ciphers (elliptic curves), not compatible with IE < 11, OpenSSL-0.9.8, Safari < 7, Android < 4.4
-- `ciphers-medium<tab>`: Medium-security ciphers with good compatibility (No IE6, IE8) but TLSv1 and SHA required
-- `ciphers-low<tab>`: Low-security ciphers (using weak 3DES cipher and TLSv1), but compatible with everything but IE6 and Java6
+- `ciphers-paranoid<tab>`: Even-more-secure ciphers (elliptic curves, no GCM), not compatible with IE < 11, OpenSSL-0.9.8, Safari < 7, Android != 4.4
+- **`ciphers-modern<tab>`: High-security ciphers (elliptic curves), not compatible with IE < 11, OpenSSL-0.9.8, Safari < 7, Android < 4.4 (recommended)**
+- `ciphers-compat<tab>`: Medium-security ciphers with good compatibility (No IE on WinXP) but TLSv1 and SHA required
+- `ciphers-old<tab>`: Low-security ciphers (using weak DES and SHA ciphers, TLSv1), but compatible with everything but IE6 and Java6
 - `ssl-options<tab>`: Bootstrap secure SSL options
 
 Example:
 ```nginx
-ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-ssl_ciphers 'ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS';
+# High-security ciphers (elliptic curves), less compatibility
+# No IE < 10, OpenSSL-0.9.8, Safari < 7, Android < 4.4
+ssl_protocols TLSv1.1 TLSv1.2;
+ssl_ciphers 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256';
 ```
 
 Or add a robots.txt file with `robots.txt<tab>`:

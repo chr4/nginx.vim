@@ -682,23 +682,46 @@ syn keyword ngxDirective xslt_types
 syn keyword ngxDirective zone
 
 " Mark insecure SSL Ciphers (Note: List might not not complete)
-syn match ngxSSLCipherInsecure '[^!]\zs3DES'
-syn match ngxSSLCipherInsecure '[^!3]\zsDES'
+" Reference: https://www.openssl.org/docs/man1.0.2/apps/ciphers.html
+syn match ngxSSLCipherInsecure '[^!]\zsSSLv3'
+syn match ngxSSLCipherInsecure '[^!]\zsSSLv2'
+syn match ngxSSLCipherInsecure '[^!]\zsHIGH'
+syn match ngxSSLCipherInsecure '[^!]\zsMEDIUM'
+syn match ngxSSLCipherInsecure '[^!]\zsLOW'
+syn match ngxSSLCipherInsecure '[^!]\zsDEFAULT'
+syn match ngxSSLCipherInsecure '[^!]\zsCOMPLEMENTOFDEFAULT'
+syn match ngxSSLCipherInsecure '[^!]\zsALL'
+syn match ngxSSLCipherInsecure '[^!]\zsCOMPLEMENTOFALL'
+
+syn match ngxSSLCipherInsecure '[^!]\zsSHA\ze\D'
+syn match ngxSSLCipherInsecure '[^!]\zsSHA1\ze\D'     " Match SHA1 without matching SHA256+
+syn match ngxSSLCipherInsecure '[^!]\zsMD5'
 syn match ngxSSLCipherInsecure '[^!]\zsRC2'
 syn match ngxSSLCipherInsecure '[^!]\zsRC4'
-syn match ngxSSLCipherInsecure '[^!]\zsMD5'
-syn match ngxSSLCipherInsecure '[^!]\zsSHA\ze\W'
-syn match ngxSSLCipherInsecure '[^!]\zsSHA1\ze\W'
+syn match ngxSSLCipherInsecure '[^!]\zs3DES'
+syn match ngxSSLCipherInsecure '[^!3]\zsDES'
 syn match ngxSSLCipherInsecure '[^!]\zsaDSS'
 syn match ngxSSLCipherInsecure '[^!a]\zsDSS'
 syn match ngxSSLCipherInsecure '[^!]\zsIDEA'
 syn match ngxSSLCipherInsecure '[^!]\zsSEED'
+syn match ngxSSLCipherInsecure '[^!]\zsEXP\w*'        " Match all EXPORT ciphers
+syn match ngxSSLCipherInsecure '[^!]\zsaGOST\w*'      " Match all GOST ciphers
+syn match ngxSSLCipherInsecure '[^!]\zskGOST\w*'
+syn match ngxSSLCipherInsecure '[^!ak]\zsGOST\w*'
+syn match ngxSSLCipherInsecure '[^!]\zs[kae]\?FZA'    " Not implemented
 syn match ngxSSLCipherInsecure '[^!]\zsECB'
-syn match ngxSSLCipherInsecure '[^!]\zsMEDIUM'
-syn match ngxSSLCipherInsecure '[^!]\zsLOW'
-syn match ngxSSLCipherInsecure '[^!]\zsaNULL'
-syn match ngxSSLCipherInsecure '[^!]\zseNULL'
-syn match ngxSSLCipherInsecure '[^!ae]\zsNULL'
+syn match ngxSSLCipherInsecure '[^!]\zs[aes]NULL'
+
+" Anonymous cipher suites should never be used
+syn match ngxSSLCipherInsecure '[^!ECa]\zsDH\ze[^E]'  " Try to match DH without DHE, EDH, EECDH, etc.
+syn match ngxSSLCipherInsecure '[^!EA]\zsECDH\ze[^E]' " Do not match EECDH, ECDHE
+syn match ngxSSLCipherInsecure '[^!]\zsADH'
+syn match ngxSSLCipherInsecure '[^!]\zskDHE'
+syn match ngxSSLCipherInsecure '[^!]\zskEDH'
+syn match ngxSSLCipherInsecure '[^!]\zskECDHE'
+syn match ngxSSLCipherInsecure '[^!]\zskEECDH'
+syn match ngxSSLCipherInsecure '[^!E]\zsAECDH'
+
 
 syn keyword ngxProxyNextUpstreamOptions error          contained
 syn keyword ngxProxyNextUpstreamOptions timeout        contained

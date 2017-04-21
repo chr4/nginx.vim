@@ -712,6 +712,7 @@ if !exists('g:loaded_sslsecure')
   syn match ngxSSLCipherInsecure '[^!3]\zsDES'
   syn match ngxSSLCipherInsecure '[^!]\zsaDSS'
   syn match ngxSSLCipherInsecure '[^!a]\zsDSS'
+  syn match ngxSSLCipherInsecure '[^!]\zsPSK'
   syn match ngxSSLCipherInsecure '[^!]\zsIDEA'
   syn match ngxSSLCipherInsecure '[^!]\zsSEED'
   syn match ngxSSLCipherInsecure '[^!]\zsEXP\w*'        " Match all EXPORT ciphers

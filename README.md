@@ -100,6 +100,3 @@ git clone https://github.com/chr4/nginx.vim.git bundle/nginx.vim
 # Optionally, if you like Jinja template syntax highlighting
 git clone https://github.com/lepture/vim-jinja.git bundle/vim-jinja
 ```
-
-## License
-Copyright (c) Chris Aumann. Distributed under the same terms as Vim itself. See :help license.

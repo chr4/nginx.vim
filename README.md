@@ -73,29 +73,17 @@ It also has auto-completion for location and server blocks with `location<tab>` 
 
 ## Installation
 
-### NeoBundle:
+Just plug it into your favorite Vim package manager:
 
 ```vim
-NeoBundle 'chr4/nginx.vim'
+" vim-plug
+Plug 'chr4/nginx.vim'
 
-" Optionally, if you like Jinja template syntax highlighting
-NeoBundle 'lepture/vim-jinja'
-```
+" Dein.vim
+call dein#add('chr4/nginx.vim')
 
-### Vundle:
-
-```vim
+" Vundle
 Plugin 'chr4/nginx.vim'
-
-" Optionally, if you like Jinja template syntax highlighting
-Plugin 'lepture/vim-jinja'
 ```
 
-### Pathogen:
-
-```shell
-git clone https://github.com/chr4/nginx.vim.git bundle/nginx.vim
-
-# Optionally, if you like Jinja template syntax highlighting
-git clone https://github.com/lepture/vim-jinja.git bundle/vim-jinja
-```
+Optionally, if you like [Jinja](http://jinja.pocoo.org/) template syntax highlighting, install `lepture/vim-jinja`, too.

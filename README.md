@@ -21,7 +21,6 @@ Furthermore:
 - Remove annoying delimiters, resulting in strange word-boundaries
 
 ## Screenshots
-
 A `server` block with highlighting of insecure `ssl_protocol` options:
 ![nginx server block with SSL configuration](https://chr4.org/images/nginx_ssl.png)
 

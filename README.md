@@ -20,6 +20,9 @@ Furthermore:
 
 - Remove annoying delimiters, resulting in strange word-boundaries
 
+*Note: Also check out [sslsecure.vim](https://github.com/chr4/sslsecure.vim): it supports highlighting insecure SSL/TLS cipher suites and protocols in all your files!*
+
+
 ## Screenshots
 A `server` block with highlighting of insecure `ssl_protocol` options:
 ![nginx server block with SSL configuration](https://chr4.org/images/nginx_ssl.png)

@@ -76,7 +76,7 @@ It also has auto-completion for location and server blocks with `location<tab>` 
 Just plug it into your favorite Vim package manager:
 
 ```vim
-" vim-plug
+" Plug
 Plug 'chr4/nginx.vim'
 
 " Dein.vim

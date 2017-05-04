@@ -234,7 +234,9 @@ syn keyword ngxDirective geoip_proxy_recursive
 syn keyword ngxDirective google_perftools_profiles
 syn keyword ngxDirective gunzip
 syn keyword ngxDirective gunzip_buffers
-syn keyword ngxDirective gzip
+syn keyword ngxDirective gzip nextgroup=ngxGzipOn,ngxGzipOff skipwhite
+syn keyword ngxGzipOn on contained
+syn keyword ngxGzipOff off contained
 syn keyword ngxDirective gzip_buffers
 syn keyword ngxDirective gzip_comp_level
 syn keyword ngxDirective gzip_disable
@@ -2293,6 +2295,8 @@ hi link ngxSSLSessionTicketsOff ngxBoolean
 hi link ngxSSLSessionTicketsOn Error
 hi link ngxSSLPreferServerCiphersOn ngxBoolean
 hi link ngxSSLPreferServerCiphersOff Error
+hi link ngxGzipOff ngxBoolean
+hi link ngxGzipOn Error
 hi link ngxSSLCipherInsecure Error
 
 hi link ngxThirdPartyLuaBlock Function

@@ -546,9 +546,9 @@ syn keyword ngxDirective ssl_ecdh_curve
 syn keyword ngxDirective ssl_engine
 syn keyword ngxDirective ssl_handshake_timeout
 syn keyword ngxDirective ssl_password_file
-syn keyword ngxDirective ssl_prefer_server_ciphers nextgroup=ngxSSLPreferServerCiphersInsecure,ngxSSLPreferServerCiphersTrue skipwhite
-syn keyword ngxSSLPreferServerCiphersTrue on contained
-syn keyword ngxSSLPreferServerCiphersInsecure off contained
+syn keyword ngxDirective ssl_prefer_server_ciphers nextgroup=ngxSSLPreferServerCiphersOff,ngxSSLPreferServerCiphersOn skipwhite
+syn keyword ngxSSLPreferServerCiphersOn on contained
+syn keyword ngxSSLPreferServerCiphersOff off contained
 syn keyword ngxDirective ssl_preread
 syn keyword ngxDirective ssl_protocols nextgroup=ngxSSLProtocol,ngxSSLProtocolDeprecated skipwhite
 syn match ngxSSLProtocol 'TLSv1' contained nextgroup=ngxSSLProtocol,ngxSSLProtocolDeprecated skipwhite
@@ -565,8 +565,8 @@ endif
 
 syn keyword ngxDirective ssl_session_cache
 syn keyword ngxDirective ssl_session_ticket_key
-syn keyword ngxDirective ssl_session_tickets nextgroup=ngxSSLSessionTicketsInsecure,ngxSSLSessionTicketsOff skipwhite
-syn keyword ngxSSLSessionTicketsInsecure on contained
+syn keyword ngxDirective ssl_session_tickets nextgroup=ngxSSLSessionTicketsOn,ngxSSLSessionTicketsOff skipwhite
+syn keyword ngxSSLSessionTicketsOn on contained
 syn keyword ngxSSLSessionTicketsOff off contained
 syn keyword ngxDirective ssl_session_timeout
 syn keyword ngxDirective ssl_stapling
@@ -2290,9 +2290,9 @@ hi link ngxCookieOptions PreProc
 hi link ngxTemplateVar Identifier
 
 hi link ngxSSLSessionTicketsOff ngxBoolean
-hi link ngxSSLSessionTicketsInsecure Error
-hi link ngxSSLPreferServerCiphersTrue ngxBoolean
-hi link ngxSSLPreferServerCiphersInsecure Error
+hi link ngxSSLSessionTicketsOn Error
+hi link ngxSSLPreferServerCiphersOn ngxBoolean
+hi link ngxSSLPreferServerCiphersOff Error
 hi link ngxSSLCipherInsecure Error
 
 hi link ngxThirdPartyLuaBlock Function

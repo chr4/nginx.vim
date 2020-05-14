@@ -310,7 +310,6 @@ syn keyword ngxDirective limit_req_dry_run
 syn keyword ngxDirective limit_req_log_level
 syn keyword ngxDirective limit_req_status
 syn keyword ngxDirective limit_req_zone
-syn keyword ngxDirective limit_zone
 syn keyword ngxDirective lingering_close
 syn keyword ngxDirective lingering_time
 syn keyword ngxDirective lingering_timeout

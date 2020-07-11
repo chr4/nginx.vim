@@ -51,7 +51,7 @@ For help with secure cipher selection, visit [Mozillas SSL Configuration Generat
 
 ## Installation
 
-If your Vim is at version 8 or later, use the first method below. Otherwise, install this plugin with any Vim plugin manager ([``vim-plug``](https://github.com/junegunn/vim-plug) is recommended).
+If your Vim is at version 8 or later, the first method below is the quickest. Otherwise, install this plugin with any Vim plugin manager ([``vim-plug``](https://github.com/junegunn/vim-plug) is recommended).
 
 ### Native plugin management (Vim 8+)
 

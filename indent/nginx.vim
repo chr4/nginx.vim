@@ -15,26 +15,20 @@ if exists('*GetNginxIndent')
   finish
 endif
 
-" TODO: handle line continuation
-function! GetNginxIndent()
-  " Find a non-blank line above the current line.
-  let prevlnum = prevnonblank(v:lnum - 1)
+function! GetNginxIndent() abort
+  let plnum = s:PrevNotAsBlank(v:lnum - 1)
 
   " Hit the start of the file, use zero indent.
-  if prevlnum == 0
+  if plnum == 0
     return 0
   endif
 
-  let ind = indent(prevlnum)
-  let prevline = getline(prevlnum)
+  let ind = indent(plnum)
 
   " Add a 'shiftwidth' after '{'
-  if prevline =~ '{\s*\%(#.*\)\?$'
-    " Add 'shiftwidth' if the previous line is not a comment line.
-    if prevline !~ '^\s*#'
-      let ind = ind + shiftwidth()
-    endif
-  endif
+  if s:AsEndWith(getline(plnum), '{')
+    let ind = ind + shiftwidth()
+  end
 
   " Subtract a 'shiftwidth' on '}'
   " This is the part that requires 'indentkeys'.
@@ -42,5 +36,38 @@ function! GetNginxIndent()
     let ind = ind - shiftwidth()
   endif
 
+  let pplnum = s:PrevNotAsBlank(plnum - 1)
+
+  if s:IsLineContinuation(plnum)
+    if !s:IsLineContinuation(pplnum)
+      let ind = ind + shiftwidth()
+    end
+  else
+    if s:IsLineContinuation(pplnum)
+      let ind = ind - shiftwidth()
+    end
+  endif
+
   return ind
+endfunction
+
+" Find the first line at or above {lnum} that is non-blank and not a comment.
+function! s:PrevNotAsBlank(lnum) abort
+  let lnum = prevnonblank(a:lnum)
+  while lnum > 0
+    if getline(lnum) !~ '^\s*#'
+      break
+    endif
+    let lnum = prevnonblank(lnum - 1)
+  endwhile
+  return lnum
+endfunction
+
+" Check whether {line} ends with {pat}, ignoring trailing comments.
+function! s:AsEndWith(line, pat) abort
+  return a:line =~ a:pat . '\m\s*\%(#.*\)\?$'
+endfunction
+
+function! s:IsLineContinuation(lnum) abort
+  return a:lnum > 0 && !s:AsEndWith(getline(a:lnum), '[;{}]')
 endfunction

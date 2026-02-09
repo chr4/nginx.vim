@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: nginx.conf
 " Maintainer: Chris Aumann <me@chr4.org>
-" Last Change: Nov 25, 2023
+" Last Change: Jan 09, 2026
 
 if exists("b:current_syntax")
   finish
